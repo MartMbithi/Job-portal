@@ -98,7 +98,7 @@ require_once('../partials/head.php');
                     <a href="forget_password">I forgot my password</a>
                 </p>
                 <p class="mb-0">
-                    <a href="register" class="text-center">Register a student membership</a>
+                    <a href="register" class="text-center">Register a student account</a>
                 </p>
             </div>
         </div>
@@ -106,4 +106,5 @@ require_once('../partials/head.php');
     <?php require_once('../partials/scripts.php'); ?>
 
 </body>
+
 </html>

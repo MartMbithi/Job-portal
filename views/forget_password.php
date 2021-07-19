@@ -68,10 +68,10 @@ require_once('../partials/head.php');
                     </div>
 
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-6">
                         </div>
-                        <div class="col-4">
-                            <button type="submit" name="Reset_Password" class="btn btn-primary btn-block">Sign In</button>
+                        <div class="col-6">
+                            <button type="submit" name="Reset_Password" class="btn btn-primary btn-block">Reset Password</button>
                         </div>
                     </div>
                 </form>
