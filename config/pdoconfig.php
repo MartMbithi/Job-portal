@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Fri Jul 09 2021
+ * Created on Mon Jul 19 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -23,7 +23,7 @@
 $DB_host = "localhost";
 $DB_user = "root";
 $DB_pass = "";
-$DB_name = "iResturant_ERP";
+$DB_name = "campus_db";
 try {
     $DB_con = new PDO("mysql:host={$DB_host};dbname={$DB_name}", $DB_user, $DB_pass);
     $DB_con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

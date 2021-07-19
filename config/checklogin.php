@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Fri Jul 09 2021
+ * Created on Mon Jul 19 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -20,10 +20,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* Admin Check Login  */
-function admin_check_login()
+
+/* Check Login  */
+function checklogin()
 {
-	if ((strlen($_SESSION['id']) == 0)) {
+	if ((strlen($_SESSION['Login_id']) == 0)) {
 		$host = $_SERVER['HTTP_HOST'];
 		$uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 		$extra = "../index";

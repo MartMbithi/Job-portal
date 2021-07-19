@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Fri Jul 09 2021
+ * Created on Mon Jul 19 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -20,8 +20,9 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
 $dbuser = "root";
 $dbpass = "";
 $host = "localhost";
-$db = "iResturant_ERP";
+$db = "campus_db";
 $mysqli = new mysqli($host, $dbuser, $dbpass, $db);
