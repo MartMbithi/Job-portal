@@ -33,7 +33,7 @@ if (isset($_POST['Confirm_Password'])) {
         $err = "Passwords Does Not Match";
     } else {
         /* Update Password */
-        $query = "UPDATE Login  SET  Login_password =? WHERE  Login_username = ? ";
+        $query = "UPDATE login  SET  Login_password =? WHERE  Login_username = ? ";
         $stmt = $mysqli->prepare($query);
         //bind paramaters
         $rc = $stmt->bind_param('ss',  $confirm_password, $Login_username);

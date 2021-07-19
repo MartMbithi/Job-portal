@@ -25,13 +25,13 @@ require_once('../config/config.php');
 if (isset($_POST['Reset_Password'])) {
 
     $Login_username = $_POST['Login_username'];
-    $query = mysqli_query($mysqli, "SELECT * from `Login` WHERE Login_username = '" . $Login_username . "' ");
+    $query = mysqli_query($mysqli, "SELECT * from `login` WHERE Login_username = '" . $Login_username . "' ");
     $num_rows = mysqli_num_rows($query);
 
     if ($num_rows > 0) {
         $n = date('y'); //Load Mumble Jumble
         $new_password = bin2hex(random_bytes($n));
-        $query = "UPDATE Login SET  Login_password=? WHERE  Login_username =? ";
+        $query = "UPDATE login SET  Login_password=? WHERE  Login_username =? ";
         $stmt = $mysqli->prepare($query);
         $rc = $stmt->bind_param('ss', $new_password, $Login_username);
         $stmt->execute();
@@ -46,3 +46,45 @@ if (isset($_POST['Reset_Password'])) {
     }
 }
 require_once('../partials/head.php');
+?>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href=""><b>Job Portal Management System</b></a>
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Enter login username to reset password</p>
+
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" name="Login_username" class="form-control" placeholder="Login Username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user-tag"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" name="Reset_Password" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+
+                <p class="mb-1">
+                    <a href="index">I remembered my password</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <?php require_once('../partials/scripts.php'); ?>
+
+</body>
+
+</html>
