@@ -28,8 +28,8 @@ if (isset($_POST['Login'])) {
     $Login_password = sha1(md5($_POST['Login_password']));
     $Login_rank = $_POST['Login_rank'];
 
-    $stmt = $mysqli->prepare("SELECT Login_username, Login_password, Login_rank, Login_id  FROM login  WHERE Login_username =? AND Login_password =? ");
-    $stmt->bind_param('ss', $Login_username, $Login_password);
+    $stmt = $mysqli->prepare("SELECT Login_username, Login_password, Login_rank, Login_id  FROM login  WHERE Login_username =? AND Login_password =?  AND Login_rank = ?");
+    $stmt->bind_param('sss', $Login_username, $Login_password, $Login_rank);
     $stmt->execute(); //execute bind
 
     $stmt->bind_result($Login_username, $Login_password, $Login_rank, $Login_id);
@@ -84,7 +84,7 @@ require_once('../partials/head.php');
                         <div class="col-8">
                             <div class="input-group mb-3">
                                 <select name="Login_rank" class="form-control">
-                                    <option>Admninistrator</option>
+                                    <option>Administrator</option>
                                     <option>Student</option>
                                 </select>
                             </div>
