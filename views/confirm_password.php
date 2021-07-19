@@ -47,3 +47,48 @@ if (isset($_POST['Confirm_Password'])) {
 }
 require_once('../partials/head.php');
 ?>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href=""><b>Job Portal Management System</b></a>
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Enter login username to reset password</p>
+
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <input type="password" name="new_password" class="form-control" placeholder="New Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" name="Confirm_Password" class="btn btn-primary btn-block">Confirm Password</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <?php require_once('../partials/scripts.php'); ?>
+
+</body>
+
+</html>
