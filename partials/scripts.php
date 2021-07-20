@@ -105,3 +105,18 @@
 
 <?php }
 ?>
+
+<script>
+    function GetCompanyCategoryDetails(val) {
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'CategoryName=' + val,
+            success: function(data) {
+                //alert(data);
+                $('#CategoryID').val(data);
+            }
+        });
+
+    }
+</script>
