@@ -257,6 +257,10 @@ require_once('../partials/head.php');
                                                 Website: <?php echo $companies->Company_website; ?>
                                             </td>
                                             <td>
+                                                <a class="badge badge-success" href="company?view=<?php echo $companies->Company_id; ?>">
+                                                    <i class="fas fa-eye"></i>
+                                                    View
+                                                </a>
                                                 <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $companies->Company_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
