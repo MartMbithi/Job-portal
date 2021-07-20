@@ -39,10 +39,10 @@ if (isset($_POST['add_student'])) {
     $Student_Login_id = $_POST['Student_Login_id'];
     $Student_account_status = 'Approved';
 
-    $student_CV = time() . $_FILES['student_CV'];
+    $student_CV = time() . $_FILES['student_CV']['name'];
     move_uploaded_file($_FILES["student_CV"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_CV);
 
-    $student_Documents = $_FILES['student_Documents'];
+    $student_Documents = $_FILES['student_Documents']['name'];
     move_uploaded_file($_FILES["student_Documents"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_Documents);
 
 
@@ -108,7 +108,7 @@ if (isset($_POST['update_student'])) {
     $Student_Contacts  = $_POST['Student_Contacts'];
     $Student_Email = $_POST['Student_Email'];
     $Student_Highest_educational_attainment = $_POST['Student_Highest_educational_attainment'];
-    $Student_id = $_POST['Student_id'];
+    $Student_Id = $_POST['Student_Id'];
 
 
     $query = "UPDATE student SET  Student_Full_Name =?, Student_ID_Passport =?, Student_Gender =?, Student_DOB =?, Student_Nationality =?,  Student_location =?, 
@@ -127,7 +127,7 @@ if (isset($_POST['update_student'])) {
         $Student_Contacts,
         $Student_Email,
         $Student_Highest_educational_attainment,
-        $Student_id
+        $Student_Id
     );
 
     $stmt->execute();
@@ -145,7 +145,7 @@ if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
     $auth_del = $_GET['auth'];
 
-    $adn = "DELETE FROM student WHERE Student_id=?";
+    $adn = "DELETE FROM student WHERE Student_Id=?";
     $del_auth = "DELETE FROM login WHERE Login_id = ?";
 
     $stmt = $mysqli->prepare($adn);
@@ -207,7 +207,7 @@ require_once('../partials/head.php');
                     <hr>
                     <!-- Add Modal -->
                     <div class="modal fade" id="add_modal">
-                        <div class="modal-dialog  modal-lg">
+                        <div class="modal-dialog  modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Fill All Values </h4>
@@ -222,7 +222,7 @@ require_once('../partials/head.php');
                                                 <div class="form-group col-md-6">
                                                     <label for="">Full Name</label>
                                                     <input type="text" required name="Student_Full_Name" class="form-control">
-                                                    <input type="text" required name="Student_Login_id" value="<?php echo $sys_gen_id; ?>" class="form-control">
+                                                    <input type="hidden" required name="Student_Login_id" value="<?php echo $sys_gen_id; ?>" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">ID / Passport Number</label>
@@ -314,7 +314,7 @@ require_once('../partials/head.php');
                                             <td><?php echo $std->Student_Full_Name; ?></td>
                                             <td><?php echo $std->Student_ID_Passport; ?></td>
                                             <td><?php echo $std->Student_Gender; ?></td>
-                                            <td><?php echo $std->Student_DOB; ?></td>
+                                            <td><?php echo date('d M Y', strtotime($std->Student_DOB)); ?></td>
                                             <td>
                                                 Phone: <?php echo $std->Student_Contacts; ?><br>
                                                 Email: <?php echo $std->Student_Email; ?><br>
@@ -349,7 +349,7 @@ require_once('../partials/head.php');
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="">Full Name</label>
                                                                                 <input type="text" required name="Student_Full_Name" value="<?php echo $std->Student_Full_Name; ?>" class="form-control">
-                                                                                <input type="text" required name="Student_id" value="<?php echo $std->Student_id; ?>" class="form-control">
+                                                                                <input type="hidden" required name="Student_Id" value="<?php echo $std->Student_Id; ?>" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="">ID / Passport Number</label>
@@ -421,7 +421,7 @@ require_once('../partials/head.php');
                                                                 <br>
                                                                 <p>Heads Up, You are about to delete <?php echo $std->Student_Full_Name; ?>. This action is irrevisble.</p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="students?delete=<?php echo $std->Student_id; ?>&auth=<?php echo $std->Student_Login_id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="students?delete=<?php echo $std->Student_Id; ?>&auth=<?php echo $std->Student_Login_id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
