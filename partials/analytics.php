@@ -19,3 +19,36 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+
+/* Company Categories */
+$query = "SELECT COUNT(*)  FROM `company_categories` ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($company_categrories);
+$stmt->fetch();
+$stmt->close();
+
+/* Companies */
+$query = "SELECT COUNT(*)  FROM `company` ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($companies);
+$stmt->fetch();
+$stmt->close();
+
+/* Posted Jobs */
+$query = "SELECT COUNT(*)  FROM `job` ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($jobs);
+$stmt->fetch();
+$stmt->close();
+
+/* Students */
+$query = "SELECT COUNT(*)  FROM `student` ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($students);
+$stmt->fetch();
+$stmt->close();
