@@ -46,7 +46,37 @@ if (isset($_POST['Update_Profile'])) {
 }
 
 /* Update Auth Details */
+if (isset($_POST['Update_Auth'])) {
 
+    $Login_id = $_SESSION['Login_id'];
+    $Login_username = $_POST['Login_username'];
+    $old_password = $_POST['old_password'];
+    $new_password  = $_POST['new_password'];
+    $confirm_password  = $_POST['confirm_password'];
+    /* Check If Old Passwords Match */
+    $sql = "SELECT * FROM  login  WHERE Login_id = '$Login_id'";
+    $res = mysqli_query($mysqli, $sql);
+    if (mysqli_num_rows($res) > 0) {
+        $row = mysqli_fetch_assoc($res);
+
+        if ($old_password != $row['Login_password']) {
+            $err =  "Please Enter Correct Old Password";
+        } elseif ($new_password != $confirm_password) {
+            $err = "Confirmation Password Does Not Match";
+        } else {
+
+            $query = "UPDATE login SET  Login_username =?, Login_password =? WHERE Login_id =?    ";
+            $stmt = $mysqli->prepare($query);
+            $rc = $stmt->bind_param('sss', $Login_username, $confirm_password, $Login_id);
+            $stmt->execute();
+            if ($stmt) {
+                $success = "$Login_username Account Login Details Updated";
+            } else {
+                $info = "Please Try Again Or Try Later";
+            }
+        }
+    }
+}
 require_once('../partials/head.php');
 ?>
 
