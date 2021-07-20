@@ -50,9 +50,9 @@ if (isset($_POST['Update_Auth'])) {
 
     $Login_id = $_SESSION['Login_id'];
     $Login_username = $_POST['Login_username'];
-    $old_password = $_POST['old_password'];
-    $new_password  = $_POST['new_password'];
-    $confirm_password  = $_POST['confirm_password'];
+    $old_password = sha1(md5($_POST['old_password']));
+    $new_password  = sha1(md5($_POST['new_password']));
+    $confirm_password  = sha1(md5($_POST['confirm_password']));
     /* Check If Old Passwords Match */
     $sql = "SELECT * FROM  login  WHERE Login_id = '$Login_id'";
     $res = mysqli_query($mysqli, $sql);
