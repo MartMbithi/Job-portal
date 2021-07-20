@@ -136,7 +136,7 @@ require_once('../partials/head.php');
                                                 <th>Job Category</th>
                                                 <th>Company Hiring</th>
                                                 <th>Job Location</th>
-                                                <th>Application Date</th>
+                                                <th>Job Dates</th>
                                                 <th>No Of Vacancies</th>
                                             </tr>
                                         </thead>
@@ -158,9 +158,11 @@ require_once('../partials/head.php');
                                                         Email : <?php echo $jobs->Company_email; ?>
                                                     </td>
                                                     <td><?php echo $jobs->Job_location; ?></td>
-                                                    <td><?php echo $jobs->Job_apply_date; ?></td>
+                                                    <td>
+                                                        Application Date: <?php echo date('d M Y', strtotime($jobs->Job_apply_date)); ?><br>
+                                                        Closing Date :<?php echo date('d M Y', strtotime($jobs->Job_Last_application_date)); ?>
+                                                    </td>
                                                     <td><?php echo $jobs->Job_No_of_vacancy; ?></td>
-
                                                 </tr>
                                             <?php
                                             } ?>

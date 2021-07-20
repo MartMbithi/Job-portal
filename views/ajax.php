@@ -30,3 +30,13 @@ if (!empty($_POST["CategoryName"])) {
         echo htmlentities($row['Category_id']);
     }
 }
+
+
+if (!empty($_POST["CompanyName"])) {
+    $id = $_POST['CompanyName'];
+    $stmt = $DB_con->prepare("SELECT * FROM company WHERE Company_name = :id");
+    $stmt->execute(array(':id' => $id));
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo htmlentities($row['Company_id']);
+    }
+}

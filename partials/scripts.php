@@ -119,4 +119,17 @@
         });
 
     }
+
+    function GetCompanyDetails(val) {
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'CompanyName=' + val,
+            success: function(data) {
+                //alert(data);
+                $('#CompanyID').val(data);
+            }
+        });
+
+    }
 </script>
