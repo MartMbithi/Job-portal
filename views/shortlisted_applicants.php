@@ -122,7 +122,7 @@ require_once('../partials/head.php');
                                                 Nationality: <?php echo $applications->Student_Nationality; ?>
                                             </td>
                                             <td>
-                                                Application Date: <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
+                                               <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
                                             </td>
                                             <td>
                                                 <?php echo date('d M Y', strtotime($applications->Shortlisting_Date)); ?>
