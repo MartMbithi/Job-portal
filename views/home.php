@@ -75,7 +75,6 @@ require_once('../partials/head.php');
                             </div>
                             <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-dice"></i></span>
@@ -88,9 +87,7 @@ require_once('../partials/head.php');
                             </div>
                             <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
 
-                        <!-- fix for small devices only -->
                         <div class="clearfix hidden-md-up"></div>
 
                         <div class="col-12 col-sm-6 col-md-3">
@@ -105,7 +102,6 @@ require_once('../partials/head.php');
                             </div>
                             <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
@@ -118,11 +114,63 @@ require_once('../partials/head.php');
                             </div>
                             <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
+                        <div class="card col-12">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Latest Job Posts</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Job Title</th>
+                                                <th>Job Category</th>
+                                                <th>Company Hiring</th>
+                                                <th>Job Location</th>
+                                                <th>Application Date</th>
+                                                <th>No Of Vacancies</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $ret = "SELECT * FROM job j INNER JOIN company c ON c.Company_id = j.Job_Company_id ";
+                                            $stmt = $mysqli->prepare($ret);
+                                            $stmt->execute(); //ok
+                                            $res = $stmt->get_result();
+                                            while ($jobs = $res->fetch_object()) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $jobs->Job_title; ?></td>
+                                                    <td><?php echo $jobs->Job_Category; ?></td>
+                                                    <td>
+                                                        Name: <?php echo $jobs->Company_name; ?><br>
+                                                        Location: <?php echo $jobs->Company_location; ?><br>
+                                                        Contact : <?php echo $jobs->Company_contact; ?><br>
+                                                        Email : <?php echo $jobs->Company_email; ?>
+                                                    </td>
+                                                    <td><?php echo $jobs->Job_location; ?></td>
+                                                    <td><?php echo $jobs->Job_apply_date; ?></td>
+                                                    <td><?php echo $jobs->Job_No_of_vacancy; ?></td>
+
+                                                </tr>
+                                            <?php
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.row -->
                 </div>
-                <!--/. container-fluid -->
             </section>
             <!-- /.content -->
         </div>

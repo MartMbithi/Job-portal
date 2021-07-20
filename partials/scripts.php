@@ -21,6 +21,9 @@
 <!-- Load Table -->
 <script>
     $(document).ready(function() {
+        $('.table').DataTable();
+    });
+    $(document).ready(function() {
         $('#report').DataTable({
             dom: 'Bfrtip',
             buttons: [
