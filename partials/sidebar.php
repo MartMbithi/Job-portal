@@ -64,7 +64,7 @@
                         <a href="job_applicants" class="nav-link">
                             <i class="nav-icon fas fa-file-signature"></i>
                             <p>
-                                Job Applicantions
+                                Job Applications
                             </p>
                         </a>
                     </li>
