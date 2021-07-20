@@ -23,7 +23,30 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 checklogin();
+
 /* Update Profile */
+if (isset($_POST['Update_Profile'])) {
+
+    $Admin_Login_id = $_SESSION['Login_id'];
+    $Admin_full_name = $_POST['Admin_full_name'];
+    $Admin_contact = $_POST['Admin_contact'];
+    $Admin_email  = $_POST['Admin_email'];
+    $Admin_username  = $_POST['Admin_username'];
+
+    $query = "UPDATE admin SET  Admin_full_name =?, Admin_contact =?, Admin_email =?, Admin_username =? WHERE Admin_Login_id =?    ";
+    $stmt = $mysqli->prepare($query);
+    $rc = $stmt->bind_param('sssss', $Admin_full_name, $Admin_contact, $Admin_email, $Admin_username, $Admin_Login_id);
+    $stmt->execute();
+
+    if ($stmt) {
+        $success = "$Admin_full_name Account Updated";
+    } else {
+        $info = "Please Try Again Or Try Later";
+    }
+}
+
+/* Update Auth Details */
+
 require_once('../partials/head.php');
 ?>
 
