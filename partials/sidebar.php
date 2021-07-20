@@ -76,6 +76,48 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Reports
+                                <i class="fas fa-angle-left right"></i>
+                                <span class="badge badge-info right">5</span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="reports_companies" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Companies</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="reports_jobs" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Posted Jobs</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="reports_students" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Students</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="reports_applications" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Applications</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="reports_shortlisted" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Shortlisted</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a href="logout" class="nav-link">
                             <i class="nav-icon fas fa-power-off"></i>
