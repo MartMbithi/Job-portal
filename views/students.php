@@ -186,13 +186,13 @@ require_once('../partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-bold">Posted Jobs</h1>
+                            <h1 class="m-0 text-bold">Students</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">Home</a></li>
                                 <li class="breadcrumb-item"><a href="home">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Jobs</li>
+                                <li class="breadcrumb-item active">Students</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -202,7 +202,7 @@ require_once('../partials/head.php');
             <section class="content">
                 <div class="container-fluid">
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Post Job Opening</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Student Account</button>
                     </div>
                     <hr>
                     <!-- Add Modal -->
@@ -219,55 +219,68 @@ require_once('../partials/head.php');
                                     <form method="post" enctype="multipart/form-data" role="form">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="form-group col-md-4">
-                                                    <label for="">Job Title</label>
-                                                    <input type="text" required name="Job_title" class="form-control">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Full Name</label>
+                                                    <input type="text" required name="Student_Full_Name" class="form-control">
+                                                    <input type="text" required name="Student_Login_id" value="<?php echo $sys_gen_id; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">ID / Passport Number</label>
+                                                    <input type="text" required name="Student_ID_Passport" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="">Job Category</label>
-                                                    <input type="text" required name="Job_Category" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="">Job Location</label>
-                                                    <input type="text" required name="Job_location" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="">Job Apply Date</label>
-                                                    <input type="date" required name="Job_apply_date" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="">Job Application Closing Date</label>
-                                                    <input type="date" required name="Job_Last_application_date" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="">Job No Of Vacancies</label>
-                                                    <input type="number" required name="Job_No_of_vacancy" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Company Name</label>
-                                                    <select id="CompanyName" onchange="GetCompanyDetails(this.value)" class="form-control">
-                                                        <option>Select Company Name</option>
-                                                        <?php
-                                                        $ret = "SELECT * FROM company ";
-                                                        $stmt = $mysqli->prepare($ret);
-                                                        $stmt->execute(); //ok
-                                                        $res = $stmt->get_result();
-                                                        while ($company = $res->fetch_object()) {
-                                                        ?>
-                                                            <option><?php echo $company->Company_name; ?></option>
-                                                        <?php
-                                                        } ?>
+                                                    <label for="">Gender</label>
+                                                    <select type="text" required name="Student_Gender" class="form-control">
+                                                        <option>Male</option>
+                                                        <option>Female</option>
                                                     </select>
-                                                    <input type="hidden" required name="Job_Company_id" id="CompanyID" class="form-control">
                                                 </div>
-                                                <div class="form-group col-md-12">
-                                                    <label for="exampleInputPassword1">Job Description</label>
-                                                    <textarea name="Job_description" rows="5" class="form-control"></textarea>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">D.O.B</label>
+                                                    <input type="date" required name="Student_DOB" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Nationality</label>
+                                                    <input type="text" required name="Student_Nationality" class="form-control">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Location</label>
+                                                    <input type="text" required name="Student_location" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Contacts</label>
+                                                    <input type="text" required name="Student_Contacts" class="form-control">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Email</label>
+                                                    <input type="email" required name="Student_Email" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Highest Education Level Attained</label>
+                                                    <select type="text" required name="Student_Highest_educational_attainment" class="form-control">
+                                                        <option>Primary School</option>
+                                                        <option>Secondary School</option>
+                                                        <option>Tertiary</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">CV</label>
+                                                    <input type="file" required name="student_CV" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Student Documents</label>
+                                                    <input type="file" required name="student_Documents" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Login Password</label>
+                                                    <input type="password" required name="Login_password" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="add_job" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="add_student" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -280,49 +293,47 @@ require_once('../partials/head.php');
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Job Title</th>
-                                        <th>Job Category</th>
-                                        <th>Company Hiring</th>
-                                        <th>Job Location</th>
-                                        <th>Job Dates</th>
-                                        <th>No Of Vacancies</th>
+                                        <th>Name</th>
+                                        <th>ID/ Passport No</th>
+                                        <th>Gender</th>
+                                        <th>DOB</th>
+                                        <th>Contacts</th>
+                                        <th>Highest Edu Level</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM job j INNER JOIN company c ON c.Company_id = j.Job_Company_id ";
+                                    $ret = "SELECT * FROM student ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($jobs = $res->fetch_object()) {
+                                    while ($std = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $jobs->Job_title; ?></td>
-                                            <td><?php echo $jobs->Job_Category; ?></td>
+                                            <td><?php echo $std->Student_Full_Name; ?></td>
+                                            <td><?php echo $std->Student_ID_Passport; ?></td>
+                                            <td><?php echo $std->Student_Gender; ?></td>
+                                            <td><?php echo $std->Student_DOB; ?></td>
                                             <td>
-                                                Name: <?php echo $jobs->Company_name; ?><br>
-                                                Location: <?php echo $jobs->Company_location; ?><br>
-                                                Contact : <?php echo $jobs->Company_contact; ?><br>
-                                                Email : <?php echo $jobs->Company_email; ?>
+                                                Phone: <?php echo $std->Student_Contacts; ?><br>
+                                                Email: <?php echo $std->Student_Email; ?><br>
+                                                Location : <?php echo $std->Student_location; ?><br>
+                                                Nationality: <?php echo $std->Student_Nationality; ?>
                                             </td>
-                                            <td><?php echo $jobs->Job_location; ?></td>
+                                            <td><?php echo $std->Student_Highest_educational_attainment; ?></td>
                                             <td>
-                                                Application Date: <?php echo date('d M Y', strtotime($jobs->Job_apply_date)); ?><br>
-                                                Closing Date : <?php echo date('d M Y', strtotime($jobs->Job_Last_application_date)); ?>
-                                            </td>
-                                            <td><?php echo $jobs->Job_No_of_vacancy; ?></td>
-                                            <td>
-                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $jobs->Job_id; ?>">
+
+                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $std->Student_Id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
                                                 </a>
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $jobs->Job_id; ?>">
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $std->Student_Id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
                                                 <!-- Update Modal -->
-                                                <div class="modal fade" id="edit-<?php echo $jobs->Job_id; ?>">
+                                                <div class="modal fade" id="edit-<?php echo $std->Student_Id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -335,42 +346,60 @@ require_once('../partials/head.php');
                                                                 <form method="post" enctype="multipart/form-data" role="form">
                                                                     <div class="card-body">
                                                                         <div class="row">
-                                                                            <div class="form-group col-md-4">
-                                                                                <label for="">Job Title</label>
-                                                                                <input type="text" required name="Job_title" value="<?php echo $jobs->Job_title; ?>" class="form-control">
-                                                                                <input type="hidden" required name="Job_id" value="<?php echo $jobs->Job_id; ?>" class="form-control">
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Full Name</label>
+                                                                                <input type="text" required name="Student_Full_Name" value="<?php echo $std->Student_Full_Name; ?>" class="form-control">
+                                                                                <input type="text" required name="Student_id" value="<?php echo $std->Student_id; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">ID / Passport Number</label>
+                                                                                <input type="text" required name="Student_ID_Passport" value="<?php echo $std->Student_ID_Passport; ?>" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-4">
-                                                                                <label for="">Job Category</label>
-                                                                                <input type="text" required name="Job_Category" value="<?php echo $jobs->Job_Category; ?>" class="form-control">
+                                                                                <label for="">Gender</label>
+                                                                                <select type="text" required name="Student_Gender" class="form-control">
+                                                                                    <option><?php echo $std->Student_Gender; ?></option>
+                                                                                    <option>Male</option>
+                                                                                    <option>Female</option>
+                                                                                </select>
                                                                             </div>
                                                                             <div class="form-group col-md-4">
-                                                                                <label for="">Job Location</label>
-                                                                                <input type="text" required name="Job_location" value="<?php echo $jobs->Job_location; ?>" class="form-control">
+                                                                                <label for="">D.O.B</label>
+                                                                                <input type="date" required name="Student_DOB" value="<?php echo $std->Student_DOB; ?>" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-4">
-                                                                                <label for="">Job Apply Date</label>
-                                                                                <input type="date" required name="Job_apply_date" value="<?php echo $jobs->Job_apply_date; ?>" class="form-control">
+                                                                                <label for="">Nationality</label>
+                                                                                <input type="text" required name="Student_Nationality" value="<?php echo $std->Student_Nationality; ?>" class="form-control">
                                                                             </div>
-                                                                            <div class="form-group col-md-4">
-                                                                                <label for="">Job Application Closing Date</label>
-                                                                                <input type="date" required name="Job_Last_application_date" value="<?php echo $jobs->Job_Last_application_date; ?>" class="form-control">
+
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Location</label>
+                                                                                <input type="text" required name="Student_location" value="<?php echo $std->Student_location; ?>" class="form-control">
                                                                             </div>
-                                                                            <div class="form-group col-md-4">
-                                                                                <label for="">Job No Of Vacancies</label>
-                                                                                <input type="number" required name="Job_No_of_vacancy" value="<?php echo $jobs->Job_No_of_vacancy; ?>" class="form-control">
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Contacts</label>
+                                                                                <input type="text" required name="Student_Contacts" value="<?php echo $std->Student_Contacts; ?>" class="form-control">
                                                                             </div>
-                                                                            <div class="form-group col-md-12">
-                                                                                <label for="exampleInputPassword1">Job Description</label>
-                                                                                <textarea name="Job_description" rows="5" class="form-control"><?php echo $jobs->Job_description; ?></textarea>
+
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Email</label>
+                                                                                <input type="email" required name="Student_Email" value="<?php echo $std->Student_Email; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Highest Education Level Attained</label>
+                                                                                <select type="text" required name="Student_Highest_educational_attainment" class="form-control">
+                                                                                    <option><?php echo $std->Student_Highest_educational_attainment; ?></option>
+                                                                                    <option>Primary School</option>
+                                                                                    <option>Secondary School</option>
+                                                                                    <option>Tertiary</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="text-right">
-                                                                        <button type="submit" name="update_job" class="btn btn-primary">Submit</button>
+                                                                        <button type="submit" name="update_student" class="btn btn-primary">Submit</button>
                                                                     </div>
                                                                 </form>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -378,7 +407,7 @@ require_once('../partials/head.php');
                                                 <!-- End Modal -->
 
                                                 <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $jobs->Job_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete-<?php echo $std->Student_Id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -388,11 +417,11 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
-                                                                <h4>Delete <?php echo $jobs->Job_title; ?> ?</h4>
+                                                                <h4>Delete <?php echo $std->Student_Full_Name; ?> ?</h4>
                                                                 <br>
-                                                                <p>Heads Up, You are about to delete <?php echo $jobs->Job_title; ?>. This action is irrevisble.</p>
+                                                                <p>Heads Up, You are about to delete <?php echo $std->Student_Full_Name; ?>. This action is irrevisble.</p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="jobs?delete=<?php echo $jobs->Job_id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="students?delete=<?php echo $std->Student_id; ?>&auth=<?php echo $std->Student_Login_id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
