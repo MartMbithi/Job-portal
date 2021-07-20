@@ -145,15 +145,15 @@ require_once('../partials/head.php');
                                     <form method="post" enctype="multipart/form-data" role="form">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                     <label for="">Job Title</label>
                                                     <input type="text" required name="Job_title" class="form-control">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                     <label for="">Job Category</label>
                                                     <input type="text" required name="Job_Category" class="form-control">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                     <label for="">Job Location</label>
                                                     <input type="text" required name="Job_location" class="form-control">
                                                 </div>
@@ -235,7 +235,7 @@ require_once('../partials/head.php');
                                             <td><?php echo $jobs->Job_location; ?></td>
                                             <td>
                                                 Application Date: <?php echo date('d M Y', strtotime($jobs->Job_apply_date)); ?><br>
-                                                Closing Date :<?php echo date('d M Y', strtotime($jobs->Job_Last_application_date)); ?>
+                                                Closing Date : <?php echo date('d M Y', strtotime($jobs->Job_Last_application_date)); ?>
                                             </td>
                                             <td><?php echo $jobs->Job_No_of_vacancy; ?></td>
                                             <td>
@@ -261,16 +261,16 @@ require_once('../partials/head.php');
                                                                 <form method="post" enctype="multipart/form-data" role="form">
                                                                     <div class="card-body">
                                                                         <div class="row">
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-4">
                                                                                 <label for="">Job Title</label>
                                                                                 <input type="text" required name="Job_title" value="<?php echo $jobs->Job_title; ?>" class="form-control">
                                                                                 <input type="hidden" required name="Job_id" value="<?php echo $jobs->Job_id; ?>" class="form-control">
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-4">
                                                                                 <label for="">Job Category</label>
                                                                                 <input type="text" required name="Job_Category" value="<?php echo $jobs->Job_Category; ?>" class="form-control">
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-4">
                                                                                 <label for="">Job Location</label>
                                                                                 <input type="text" required name="Job_location" value="<?php echo $jobs->Job_location; ?>" class="form-control">
                                                                             </div>
@@ -293,7 +293,7 @@ require_once('../partials/head.php');
                                                                         </div>
                                                                     </div>
                                                                     <div class="text-right">
-                                                                        <button type="submit" name="add_job" class="btn btn-primary">Submit</button>
+                                                                        <button type="submit" name="update_job" class="btn btn-primary">Submit</button>
                                                                     </div>
                                                                 </form>
 
