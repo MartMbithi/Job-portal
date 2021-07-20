@@ -44,7 +44,7 @@ if (isset($_GET['delete'])) {
 if (isset($_GET['shortlist'])) {
     $Shortlisting_Application_id = $_GET['shortlist'];
     $Shortlisting_Date = date('d M Y');
-    $Shortlisting_Application_id = $_SESSION['Login_id'];
+    $Shortlisting_Login_id = $_SESSION['Login_id'];
 
     $adn = "INSERT INTO  shortlisting (Shortlisting_Date, Shortlisting_Application_id, Shortlisting_Login_id) VALUES(?,?,?)";
     $stmt = $mysqli->prepare($adn);
