@@ -18,6 +18,12 @@
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="../public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- Select2 -->
+<!-- Select2 -->
+<script src="../public/plugins/select2/js/select2.full.min.js"></script>
+<script>
+    $('.select2').select2()
+</script>
 <!-- Load Table -->
 <script>
     $(document).ready(function() {

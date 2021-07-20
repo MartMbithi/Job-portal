@@ -29,5 +29,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
     <!-- Overlay Scroll Bars -->
     <link rel="stylesheet" href="../public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../public/plugins/select2/css/select2.min.css">
 
 </head>

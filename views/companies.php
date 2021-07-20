@@ -22,6 +22,7 @@
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
+require_once('../config/codeGen.php');
 checklogin();
 
 /* Add Company  */
@@ -138,13 +139,13 @@ require_once('../partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-bold">Company Categories</h1>
+                            <h1 class="m-0 text-bold">Companies</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">Home</a></li>
                                 <li class="breadcrumb-item"><a href="home">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Company Categories</li>
+                                <li class="breadcrumb-item active">Companies</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -154,7 +155,7 @@ require_once('../partials/head.php');
             <section class="content">
                 <div class="container-fluid">
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Company Category</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Company</button>
                     </div>
                     <hr>
                     <!-- Add Modal -->
@@ -171,18 +172,56 @@ require_once('../partials/head.php');
                                     <form method="post" enctype="multipart/form-data" role="form">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="form-group col-md-12">
-                                                    <label for="">Company Category Name</label>
-                                                    <input type="text" required name="Category_name" class="form-control">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Company Name</label>
+                                                    <input type="text" required name="Company_name" class="form-control">
+                                                    <input type="hidden" required name="company_login_id" value="<?php echo $sys_gen_id; ?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Company Contacts</label>
+                                                    <input type="text" required name="Company_contact" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Company Email</label>
+                                                    <input type="text" required name="Company_email" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Company Website</label>
+                                                    <input type="text" required name="Company_website" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label for="exampleInputPassword1">Company Category Details</label>
-                                                    <textarea name="Category_desc" rows="5" class="form-control"></textarea>
+                                                    <label for="">Company Category</label>
+                                                    <select id="CategoryName" onchange="GetCompanyCategoryDetails(this.value)" class="form-control">
+                                                        <option>Select Category Name</option>
+                                                        <?php
+                                                        $ret = "SELECT * FROM company_categories ";
+                                                        $stmt = $mysqli->prepare($ret);
+                                                        $stmt->execute(); //ok
+                                                        $res = $stmt->get_result();
+                                                        while ($categories = $res->fetch_object()) {
+                                                        ?>
+                                                            <option><?php echo $categories->Category_name; ?></option>
+                                                        <?php
+                                                        } ?>
+                                                    </select>
+                                                    <input type="hidde" required name="Company_Category_id" id="CategoryID" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Company Login Username</label>
+                                                    <input type="text" required name="Login_username" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Company Login Password</label>
+                                                    <input type="password" required name="Login_password" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="exampleInputPassword1">Company Location</label>
+                                                    <textarea name="Company_location" rows="2" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="add_category" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="add_company" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -195,33 +234,39 @@ require_once('../partials/head.php');
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Category Name</th>
-                                        <th>Category Details </th>
+                                        <th>Company Name</th>
+                                        <th>Company Category</th>
+                                        <th>Company Contacts</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM company_categories ";
+                                    $ret = "SELECT * FROM company_categories cc INNER JOIN company c ON c.Company_Category_id = cc.category_id";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($categories = $res->fetch_object()) {
+                                    while ($companies = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $categories->Category_name; ?></td>
-                                            <td><?php echo $categories->Category_desc; ?></td>
+                                            <td><?php echo $companies->Company_name; ?></td>
+                                            <td><?php echo $companies->Category_name; ?></td>
                                             <td>
-                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $categories->Category_id; ?>">
+                                                Contact: <?php echo $companies->Company_contact; ?><br>
+                                                Email: <?php echo $companies->Company_email; ?><br>
+                                                Website: <?php echo $companies->Company_website; ?>
+                                            </td>
+                                            <td>
+                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $companies->Company_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
                                                 </a>
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $categories->Category_id; ?>">
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $companies->Company_id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
                                                 <!-- Update Modal -->
-                                                <div class="modal fade" id="edit-<?php echo $categories->Category_id; ?>">
+                                                <div class="modal fade" id="edit-<?php echo $companies->Company_id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -234,19 +279,31 @@ require_once('../partials/head.php');
                                                                 <form method="post" enctype="multipart/form-data" role="form">
                                                                     <div class="card-body">
                                                                         <div class="row">
-                                                                            <div class="form-group col-md-12">
-                                                                                <label for="">Company Category Name</label>
-                                                                                <input type="text" required value="<?php echo $categories->Category_name; ?>" name="Category_name" class="form-control">
-                                                                                <input type="hidden" required value="<?php echo $categories->Category_id; ?>" name="Category_id" class="form-control">
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Company Name</label>
+                                                                                <input type="text" required name="Company_name" value="<?php echo $companies->Company_name; ?>" class="form-control">
+                                                                                <input type="hidden" required name="Company_id" value="<?php echo $companies->Company_id; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Company Contacts</label>
+                                                                                <input type="text" required name="Company_contact" value="<?php echo $companies->Company_contact; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Company Email</label>
+                                                                                <input type="text" required name="Company_email" value="<?php echo $companies->Company_email; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Company Website</label>
+                                                                                <input type="text" required name="Company_website" value="<?php echo $companies->Company_website; ?>" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-12">
-                                                                                <label for="exampleInputPassword1">Company Category Details</label>
-                                                                                <textarea name="Category_desc" rows="5" class="form-control"><?php echo $categories->Category_desc; ?></textarea>
+                                                                                <label for="exampleInputPassword1">Company Location</label>
+                                                                                <textarea name="Company_location" rows="2" class="form-control"><?php echo $companies->Company_location; ?></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="text-right">
-                                                                        <button type="submit" name="update_category" class="btn btn-primary">Submit</button>
+                                                                        <button type="submit" name="update_company" class="btn btn-primary">Submit</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -256,7 +313,7 @@ require_once('../partials/head.php');
                                                 <!-- End Modal -->
 
                                                 <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $categories->Category_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete-<?php echo $companies->Company_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -266,11 +323,11 @@ require_once('../partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
-                                                                <h4>Delete <?php echo $categories->Category_name; ?> ?</h4>
+                                                                <h4>Delete <?php echo $companies->Company_name; ?> ?</h4>
                                                                 <br>
-                                                                <p>Heads Up, You are about to delete <?php echo $categories->Category_name; ?>. This action is irrevisble.</p>
+                                                                <p>Heads Up, You are about to delete <?php echo $companies->Company_name; ?>. This action is irrevisble.</p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="company_categories?delete=<?php echo $categories->Category_id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="companies?delete=<?php echo $companies->Company_id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
