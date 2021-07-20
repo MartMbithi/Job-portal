@@ -40,6 +40,24 @@ if (isset($_GET['delete'])) {
     }
 }
 
+/* Shortlist Candidate */
+if (isset($_GET['shortlist'])) {
+    $Shortlisting_Application_id = $_GET['shortlist'];
+    $Shortlisting_Date = date('d M Y');
+    $Shortlisting_Application_id = $_SESSION['Login_id'];
+
+    $adn = "INSERT INTO  shortlisting (Shortlisting_Date, Shortlisting_Application_id, Shortlisting_Login_id) VALUES(?,?,?)";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('sss', $Shortlisting_Date, $Shortlisting_Application_id, $Shortlisting_Login_id);
+    $stmt->execute();
+    $stmt->close();
+    if ($stmt) {
+        $success = "Shortlisted" && header("refresh:1; url=job_applications");
+    } else {
+        $info = "Please Try Again Or Try Later";
+    }
+}
+
 require_once('../partials/head.php');
 ?>
 
@@ -123,10 +141,38 @@ require_once('../partials/head.php');
                                                 Application Date: <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
                                             </td>
                                             <td>
+                                                <a class="badge badge-success" data-toggle="modal" href="#shortlist-<?php echo $applications->Application_id; ?>">
+                                                    <i class="fas fa-user-check"></i>
+                                                    Shortlist
+                                                </a>
+
                                                 <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $applications->Application_id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
+
+                                                <!-- Shortlist Applicant -->
+                                                <div class="modal fade" id="shortlist-<?php echo $applications->Application_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">CONFIRM SHORTLISTING</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-center text-danger">
+                                                                <h4>Shortlist <?php echo $applications->Student_Full_Name; ?>?</h4>
+                                                                <br>
+                                                                <p>Heads Up, You are about to shortlist the above candidate.</p>
+                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                <a href="job_applications?shortlist=<?php echo $applications->Application_id; ?>" class="text-center btn btn-danger"> Short List </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Shortlist -->
+
                                                 <!-- Delete Modal -->
                                                 <div class="modal fade" id="delete-<?php echo $applications->Application_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
