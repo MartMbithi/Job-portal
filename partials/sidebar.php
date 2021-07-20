@@ -61,7 +61,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="job_applicants" class="nav-link">
+                        <a href="job_applications" class="nav-link">
                             <i class="nav-icon fas fa-file-signature"></i>
                             <p>
                                 Job Applications
