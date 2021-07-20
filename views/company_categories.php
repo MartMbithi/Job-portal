@@ -37,7 +37,7 @@ if (isset($_POST['add_category'])) {
             $err =  "$Category_name Already Exists";
         }
     } else {
-        $query = "INSERT INTO company_categories (Category_name, Category_desc ) VALUES(?,?) ";
+        $query = "INSERT INTO company_categories (Category_name, Category_desc) VALUES(?,?) ";
         $stmt = $mysqli->prepare($query);
         $rc = $stmt->bind_param('ss', $Category_name, $Category_desc);
         $stmt->execute();
@@ -51,7 +51,7 @@ if (isset($_POST['add_category'])) {
 }
 
 /* Update Company Category */
-if (isset($_POST['add_category'])) {
+if (isset($_POST['update_category'])) {
     $Category_name = $_POST['Category_name'];
     $Category_desc = $_POST['Category_desc'];
     $Category_id = $_POST['Category_id'];
@@ -71,7 +71,7 @@ if (isset($_POST['add_category'])) {
 /* Delete Company Category */
 if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
-    $adn = "DELETE FROM company_categories WHERE id=?";
+    $adn = "DELETE FROM company_categories WHERE Category_id=?";
     $stmt = $mysqli->prepare($adn);
     $stmt->bind_param('s', $delete);
     $stmt->execute();
@@ -185,10 +185,60 @@ require_once('../partials/head.php');
                                                     Delete
                                                 </a>
                                                 <!-- Update Modal -->
+                                                <div class="modal fade" id="edit-<?php echo $categories->Category_id; ?>">
+                                                    <div class="modal-dialog  modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Fill All Values </h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="">Company Category Name</label>
+                                                                                <input type="text" required value="<?php echo $categories->Category_name; ?>" name="Category_name" class="form-control">
+                                                                                <input type="hidden" required value="<?php echo $categories->Category_id; ?>" name="Category_id" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="exampleInputPassword1">Company Category Details</label>
+                                                                                <textarea name="Category_desc" rows="5" class="form-control"><?php echo $categories->Category_desc; ?></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <button type="submit" name="update_category" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!-- End Modal -->
 
                                                 <!-- Delete Modal -->
-
+                                                <div class="modal fade" id="delete-<?php echo $categories->Category_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">CONFIRM</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-center text-danger">
+                                                                <h4>Delete <?php echo $categories->Category_name; ?> ?</h4>
+                                                                <br>
+                                                                <p>Heads Up, You are about to delete <?php echo $categories->Category_name; ?>. This action is irrevisble.</p>
+                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                <a href="company_categories?delete=<?php echo $categories->Category_id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!-- End Modal -->
                                             </td>
                                         </tr>
