@@ -98,7 +98,7 @@ if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
     $auth = $_GET['auth'];
 
-    $adn = "DELETE FROM company WHERE id=?";
+    $adn = "DELETE FROM company WHERE Company_id=?";
     $auth_del = "DELETE FROM login WHERE Login_id = ?";
 
     $stmt = $mysqli->prepare($adn);
@@ -204,7 +204,7 @@ require_once('../partials/head.php');
                                                         <?php
                                                         } ?>
                                                     </select>
-                                                    <input type="hidde" required name="Company_Category_id" id="CategoryID" class="form-control">
+                                                    <input type="hidden" required name="Company_Category_id" id="CategoryID" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Company Login Username</label>
@@ -327,7 +327,7 @@ require_once('../partials/head.php');
                                                                 <br>
                                                                 <p>Heads Up, You are about to delete <?php echo $companies->Company_name; ?>. This action is irrevisble.</p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="companies?delete=<?php echo $companies->Company_id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                <a href="companies?delete=<?php echo $companies->Company_id; ?>&auth=<?php echo $companies->company_login_id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>
                                                         </div>
                                                     </div>
