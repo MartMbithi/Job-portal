@@ -102,12 +102,178 @@ require_once('../partials/head.php');
                     <a href="forget_password">I forgot my password</a>
                 </p>
                 <p class="mb-0">
-                    <a href="register" class="text-center">Register a student account</a>
+                    <a data-toggle="modal" href="#add_student_account" class="text-center">Register a student account</a>
                 </p>
                 <p class="mb-0">
-                    <a href="register_company" class="text-center">Register a company account</a>
+                    <a data-toggle="modal" href="#add_company_account" class="text-center">Register a company account</a>
                 </p>
             </div>
+            <!-- Student Account Modal-->
+            <div class="modal fade" id="add_student_account">
+                <div class="modal-dialog  modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Sign Up As Student - Fill All Values</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" enctype="multipart/form-data" role="form">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Full Name</label>
+                                            <input type="text" required name="Student_Full_Name" class="form-control">
+                                            <input type="hidden" required name="Student_Login_id" value="<?php echo $sys_gen_id; ?>" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">ID / Passport Number</label>
+                                            <input type="text" required name="Student_ID_Passport" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Gender</label>
+                                            <select type="text" required name="Student_Gender" class="form-control">
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">D.O.B</label>
+                                            <input type="date" required name="Student_DOB" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Nationality</label>
+                                            <input type="text" required name="Student_Nationality" class="form-control">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for="">Location</label>
+                                            <input type="text" required name="Student_location" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Contacts</label>
+                                            <input type="text" required name="Student_Contacts" class="form-control">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for="">Email</label>
+                                            <input type="email" required name="Student_Email" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Highest Education Level Attained</label>
+                                            <select type="text" required name="Student_Highest_educational_attainment" class="form-control">
+                                                <option>Primary School</option>
+                                                <option>Secondary School</option>
+                                                <option>Tertiary</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">CV</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" required accept=".docx, .pdf, .doc" name="student_CV" class="custom-file-input" id="exampleInputFile">
+                                                    <label class="custom-file-label " for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="">Student Documents</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" required accept=".docx, .pdf, .doc" name="student_Documents" class="custom-file-input" id="exampleInputFile">
+                                                    <label class="custom-file-label " for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Login Password</label>
+                                            <input type="password" required name="Login_password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" name="add_student" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Student Account Modal -->
+
+            <!-- Company Modal -->
+            <div class="modal fade" id="add_company_account">
+                <div class="modal-dialog  modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Create A Company Account - Fill All Values </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" enctype="multipart/form-data" role="form">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Company Name</label>
+                                            <input type="text" required name="Company_name" class="form-control">
+                                            <input type="hidden" required name="company_login_id" value="<?php echo $sys_gen_id; ?>" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Company Contacts</label>
+                                            <input type="text" required name="Company_contact" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Company Email</label>
+                                            <input type="text" required name="Company_email" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Company Website</label>
+                                            <input type="text" required name="Company_website" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="">Company Category</label>
+                                            <select id="CategoryName" onchange="GetCompanyCategoryDetails(this.value)" class="form-control">
+                                                <option>Select Category Name</option>
+                                                <?php
+                                                $ret = "SELECT * FROM company_categories ";
+                                                $stmt = $mysqli->prepare($ret);
+                                                $stmt->execute(); //ok
+                                                $res = $stmt->get_result();
+                                                while ($categories = $res->fetch_object()) {
+                                                ?>
+                                                    <option><?php echo $categories->Category_name; ?></option>
+                                                <?php
+                                                } ?>
+                                            </select>
+                                            <input type="hidden" required name="Company_Category_id" id="CategoryID" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Company Login Username</label>
+                                            <input type="text" required name="Login_username" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Company Login Password</label>
+                                            <input type="password" required name="Login_password" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="exampleInputPassword1">Company Location</label>
+                                            <textarea name="Company_location" rows="2" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" name="add_company" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Company Modal -->
         </div>
     </div>
     <?php require_once('../partials/scripts.php'); ?>
