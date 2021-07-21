@@ -24,11 +24,12 @@
 /* Check Login  */
 function checklogin()
 {
-	if ((strlen($_SESSION['Login_id']) == 0)) {
+	if ((strlen($_SESSION['Login_id']) == 0) && (strlen($_SESSION['Login_rank']) == 0)) {
 		$host = $_SERVER['HTTP_HOST'];
 		$uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 		$extra = "../index";
-		$_SESSION["id"] = "";
+		$_SESSION["Login_id"] = "";
+		$_SESSION["Login_rank"] = "";
 		header("Location: http://$host$uri/$extra");
 	}
 }

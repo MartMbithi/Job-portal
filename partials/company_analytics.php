@@ -19,3 +19,47 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+/* Load Logged In Company Details */
+$Login_id = $_SESSION['Login_id'];
+$ret = "SELECT *  FROM company WHERE company_login_id = '$Login_id'";
+$stmt = $mysqli->prepare($ret);
+$stmt->execute(); //ok
+$res = $stmt->get_result();
+while ($companies = $res->fetch_object()) {
+
+    /* Posted Jobs */
+    $query = "SELECT COUNT(*)  FROM `job` WHERE Job_Company_id ='$companies->Company_id' ";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($posted_jobs);
+    $stmt->fetch();
+    $stmt->close();
+
+    /* Applications */
+    $query =
+        "SELECT COUNT(*)  FROM 
+    job J INNER JOIN applications A
+    ON A.Application_Job_id = J.Job_id WHERE J.Job_Company_id ='$companies->Company_id'  ";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($applications);
+    $stmt->fetch();
+    $stmt->close();
+
+    /* Shortlisted Applicants */
+    $query =
+        "SELECT COUNT(*)  FROM 
+    job J INNER JOIN applications A
+    ON A.Application_Job_id = J.Job_id 
+    INNER JOIN shortlisting S
+    ON S.Shortlisting_Application_id = A.Application_id
+    WHERE J.Job_Company_id ='$companies->Company_id'  ";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($shortlisted);
+    $stmt->fetch();
+    $stmt->close();
+}
