@@ -106,16 +106,8 @@ require_once('../partials/head.php');
 
                         <div class="card col-12">
                             <div class="card-header border-transparent">
-                                <h3 class="card-title">Latest Company Job Posts</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
+                                <h3 class="text-center">Latest Job Opening Posts</h3>
+                                <hr>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
@@ -124,7 +116,7 @@ require_once('../partials/head.php');
                                             <tr>
                                                 <th>Job Title</th>
                                                 <th>Job Category</th>
-                                                <th>Company Hiring</th>
+                                                <th>Job Description</th>
                                                 <th>Job Location</th>
                                                 <th>Job Dates</th>
                                                 <th>No Of Vacancies</th>
@@ -132,7 +124,8 @@ require_once('../partials/head.php');
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $ret = "SELECT * FROM job j INNER JOIN company c ON c.Company_id = j.Job_Company_id ";
+                                            $company_login_id = $_SESSION['Login_id'];
+                                            $ret = "SELECT * FROM job j INNER JOIN company c ON c.Company_id = j.Job_Company_id WHERE c.company_login_id = '$company_login_id' ";
                                             $stmt = $mysqli->prepare($ret);
                                             $stmt->execute(); //ok
                                             $res = $stmt->get_result();
@@ -142,10 +135,7 @@ require_once('../partials/head.php');
                                                     <td><?php echo $jobs->Job_title; ?></td>
                                                     <td><?php echo $jobs->Job_Category; ?></td>
                                                     <td>
-                                                        Name: <?php echo $jobs->Company_name; ?><br>
-                                                        Location: <?php echo $jobs->Company_location; ?><br>
-                                                        Contact : <?php echo $jobs->Company_contact; ?><br>
-                                                        Email : <?php echo $jobs->Company_email; ?>
+                                                        <?php echo $jobs->Job_description; ?>
                                                     </td>
                                                     <td><?php echo $jobs->Job_location; ?></td>
                                                     <td>
@@ -163,53 +153,50 @@ require_once('../partials/head.php');
                         </div>
                         <div class="card col-12">
                             <div class="card-header border-transparent">
-                                <h3 class="card-title">Latest Company Job Posts Applications</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
+                                <h3 class="text-center">Latest Job Opening Applications</h3>
+                                <hr>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
-                                    <table class="table m-0">
+                                    <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Job Title</th>
-                                                <th>Job Category</th>
-                                                <th>Company Hiring</th>
-                                                <th>Job Location</th>
-                                                <th>Job Dates</th>
-                                                <th>No Of Vacancies</th>
+                                                <th>Job Details</th>
+                                                <th>Applicant Details</th>
+                                                <th>Application Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $ret = "SELECT * FROM job j INNER JOIN company c ON c.Company_id = j.Job_Company_id ";
+                                            $ret = "SELECT * FROM applications A
+                                    INNER JOIN job J ON A.Application_Job_id = J.Job_id 
+                                    INNER JOIN company C ON C.Company_id = J.Job_Company_id 
+                                    INNER JOIN student S ON S.Student_Id = A.Application_Student_id
+                                    WHERE C.company_login_id = '$company_login_id';
+                                    ";
                                             $stmt = $mysqli->prepare($ret);
                                             $stmt->execute(); //ok
                                             $res = $stmt->get_result();
-                                            while ($jobs = $res->fetch_object()) {
+                                            while ($applications = $res->fetch_object()) {
                                             ?>
                                                 <tr>
-                                                    <td><?php echo $jobs->Job_title; ?></td>
-                                                    <td><?php echo $jobs->Job_Category; ?></td>
                                                     <td>
-                                                        Name: <?php echo $jobs->Company_name; ?><br>
-                                                        Location: <?php echo $jobs->Company_location; ?><br>
-                                                        Contact : <?php echo $jobs->Company_contact; ?><br>
-                                                        Email : <?php echo $jobs->Company_email; ?>
+                                                        Title: <?php echo $applications->Job_title; ?><br>
+                                                        Category: <?php echo $applications->Job_Category; ?><br>
+                                                        Location: <?php echo $applications->Job_location; ?>
                                                     </td>
-                                                    <td><?php echo $jobs->Job_location; ?></td>
                                                     <td>
-                                                        Application Date: <?php echo date('d M Y', strtotime($jobs->Job_apply_date)); ?><br>
-                                                        Closing Date :<?php echo date('d M Y', strtotime($jobs->Job_Last_application_date)); ?>
+                                                        <a href="student?view=<?php echo $applications->Student_Id; ?>">
+                                                            Name: <?php echo $applications->Student_Full_Name; ?><br>
+                                                        </a>
+                                                        Phone: <?php echo $applications->Student_Contacts; ?><br>
+                                                        Email: <?php echo $applications->Student_Email; ?><br>
+                                                        Location : <?php echo $applications->Student_location; ?><br>
+                                                        Nationality: <?php echo $applications->Student_Nationality; ?>
                                                     </td>
-                                                    <td><?php echo $jobs->Job_No_of_vacancy; ?></td>
+                                                    <td>
+                                                        Application Date: <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
+                                                    </td>
                                                 </tr>
                                             <?php
                                             } ?>
