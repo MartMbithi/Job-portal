@@ -24,22 +24,6 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
 checklogin();
-
-/* Delete Job Application Category */
-if (isset($_GET['delete'])) {
-    $delete = $_GET['delete'];
-    $adn = "DELETE FROM applications WHERE Application_id=?";
-    $stmt = $mysqli->prepare($adn);
-    $stmt->bind_param('s', $delete);
-    $stmt->execute();
-    $stmt->close();
-    if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=std_job_applications");
-    } else {
-        $info = "Please Try Again Or Try Later";
-    }
-}
-
 require_once('../partials/head.php');
 ?>
 
@@ -59,13 +43,13 @@ require_once('../partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-bold">My Job Applications</h1>
+                            <h1 class="m-0 text-bold">My Short Listed Applications</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="std_home">Home</a></li>
                                 <li class="breadcrumb-item"><a href="std_home">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Jobs Applications</li>
+                                <li class="breadcrumb-item active">Shortlisted Applications</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -84,18 +68,19 @@ require_once('../partials/head.php');
                                         <th>Company Details</th>
                                         <th>Applicant Details</th>
                                         <th>Application Date</th>
-                                        <th>Action</th>
+                                        <th>Shortlisting Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $login_id = $_SESSION['Login_id'];
+                                    $Login = $_SESSION['Login_id'];
                                     $ret =
                                         "SELECT * FROM applications A
                                     INNER JOIN job J ON A.Application_Job_id = J.Job_id 
                                     INNER JOIN company C ON C.Company_id = J.Job_Company_id 
                                     INNER JOIN student S ON S.Student_Id = A.Application_Student_id
-                                    WHERE S.Student_Login_id = '$login_id'
+                                    INNER JOIN shortlisting sh ON sh.Shortlisting_Application_id = A.Application_id
+                                    WHERE S.Student_Login_id = '$Login'
                                     ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
@@ -115,7 +100,6 @@ require_once('../partials/head.php');
                                                 Email : <?php echo $applications->Company_email; ?>
                                             </td>
                                             <td>
-
                                                 Name: <?php echo $applications->Student_Full_Name; ?><br>
                                                 Phone: <?php echo $applications->Student_Contacts; ?><br>
                                                 Email: <?php echo $applications->Student_Email; ?><br>
@@ -123,35 +107,10 @@ require_once('../partials/head.php');
                                                 Nationality: <?php echo $applications->Student_Nationality; ?>
                                             </td>
                                             <td>
-                                                Application Date: <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
+                                                <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
                                             </td>
                                             <td>
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $applications->Application_id; ?>">
-                                                    <i class="fas fa-trash"></i>
-                                                    Delete
-                                                </a>
-
-                                                <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $applications->Application_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">CONFIRM</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body text-center text-danger">
-                                                                <h4>Delete?</h4>
-                                                                <br>
-                                                                <p>Heads Up, You are about to delete this job application. This action is irrevisble.</p>
-                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="std_job_applications?delete=<?php echo $applications->Application_id; ?>" class="text-center btn btn-danger"> Delete </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Modal -->
+                                                <?php echo date('d M Y', strtotime($applications->Shortlisting_Date)); ?>
                                             </td>
                                         </tr>
                                     <?php

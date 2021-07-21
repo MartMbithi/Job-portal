@@ -263,7 +263,7 @@
                             <p>
                                 My Reports
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">3</span>
+                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
