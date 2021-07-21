@@ -267,11 +267,22 @@ require_once('../partials/head.php');
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="">CV</label>
-                                                    <input type="file" required name="student_CV" class="form-control">
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" required accept=".docx, .pdf, .doc" name="student_CV" class="custom-file-input" id="exampleInputFile">
+                                                            <label class="custom-file-label " for="exampleInputFile">Choose file</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
                                                 <div class="form-group col-md-4">
                                                     <label for="">Student Documents</label>
-                                                    <input type="file" required name="student_Documents" class="form-control">
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" required accept=".docx, .pdf, .doc" name="student_Documents" class="custom-file-input" id="exampleInputFile">
+                                                            <label class="custom-file-label " for="exampleInputFile">Choose file</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="">Login Password</label>

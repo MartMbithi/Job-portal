@@ -41,7 +41,9 @@ if (isset($_POST['Login'])) {
     if ($rs && $Login_rank == 'Administrator') {
         header("location:home");
     } else if ($rs && $Login_rank == 'Student') {
-        header("location:student_dasboard");
+        header("location:std_home");
+    } else if ($rs && $Login_rank == 'Company') {
+        header("location:company_home");
     } else {
         $err = "Login Failed, Please Check Your Credentials And Login Permission ";
     }
@@ -83,8 +85,9 @@ require_once('../partials/head.php');
                     <div class="row">
                         <div class="col-8">
                             <div class="input-group mb-3">
-                                <select name="Login_rank" class="form-control">
+                                <select name="Login_rank" style="width: 100%;" class="form-control basic">
                                     <option>Administrator</option>
+                                    <option>Company</option>
                                     <option>Student</option>
                                 </select>
                             </div>
@@ -100,6 +103,9 @@ require_once('../partials/head.php');
                 </p>
                 <p class="mb-0">
                     <a href="register" class="text-center">Register a student account</a>
+                </p>
+                <p class="mb-0">
+                    <a href="register_company" class="text-center">Register a company account</a>
                 </p>
             </div>
         </div>
