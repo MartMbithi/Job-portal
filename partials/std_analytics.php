@@ -40,9 +40,9 @@ while ($std = $res->fetch_object()) {
         "SELECT COUNT(*)  FROM 
         student s INNER JOIN applications A
         ON A.Application_Student_id = s.Student_Id 
-        INNER JOIN shortlisting S
-        ON S.Shortlisting_Application_id = A.Application_id
-        WHERE s.Student_id ='$std->Student_Id'  ";
+        INNER JOIN shortlisting sl
+        ON sl.Shortlisting_Application_id = A.Application_id
+        WHERE s.Student_Id ='$std->Student_Id'  ";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($shortlisted);
