@@ -42,7 +42,7 @@ if (isset($_POST['add_student'])) {
     $student_CV = time() . $_FILES['student_CV']['name'];
     move_uploaded_file($_FILES["student_CV"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_CV);
 
-    $student_Documents = $_FILES['student_Documents']['name'];
+    $student_Documents =  time() . $_FILES['student_Documents']['name'];
     move_uploaded_file($_FILES["student_Documents"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_Documents);
 
 

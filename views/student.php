@@ -74,7 +74,7 @@ require_once('../partials/head.php');
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1><?php echo $admin->Student_Full_Name; ?> Profile</h1>
+                                <h1><?php echo $student->Student_Full_Name; ?> Profile</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -142,7 +142,10 @@ require_once('../partials/head.php');
                                     <div class="card-body">
                                         <div class="tab-content">
                                             <div class="active tab-pane" id="activity">
-
+                                                <div class="text-center">
+                                                    <a target="_blank" href="../public/uploads/user_data/<?php echo $student->student_CV; ?>" class="btn btn-outline-success"><i class="fas fa-download"></i>Download CV</a>
+                                                    <a target="_blank" href="../public/uploads/user_data/<?php echo $student->student_Documents; ?>" class="btn btn-outline-success"><i class="fas fa-download"></i>Download Other <?php echo $student->Student_Full_Name; ?> Documents</a>
+                                                </div>
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="timeline">
@@ -158,7 +161,7 @@ require_once('../partials/head.php');
                                                             <label class="col-sm-2 col-form-label">Login Username</label>
                                                             <div class="col-sm-10">
                                                                 <input type="text" required name="Login_username" value="<?php echo $admin_auth->Login_username; ?>" class="form-control">
-                                                                <input type="text" required name="Login_id" value="<?php echo $student->Student_Login_id; ?>" class="form-control">
+                                                                <input type="hidden" required name="Login_id" value="<?php echo $student->Student_Login_id; ?>" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
