@@ -127,9 +127,169 @@
                         </a>
                     </li>
                 <?php
+                } elseif ($_SESSION['Login_rank'] == 'Company') {
+                ?>
+                    <li class="nav-item">
+                        <a href="company_home" class="nav-link">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Home
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="company_profile" class="nav-link">
+                            <i class="nav-icon fas fa-user-tag"></i>
+                            <p>
+                                Profile
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="company_jobs" class="nav-link">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Jobs
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="company_job_applications" class="nav-link">
+                            <i class="nav-icon fas fa-file-signature"></i>
+                            <p>
+                                Job Applications
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="company_shortlisted_applicants" class="nav-link">
+                            <i class="nav-icon fas fa-user-check"></i>
+                            <p>
+                                ShortListed Applicants
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Reports
+                                <i class="fas fa-angle-left right"></i>
+                                <span class="badge badge-info right">3</span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="company_reports_jobs" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Posted Jobs</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="company_reports_applications" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Applications</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="company_reports_shortlisted" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Shortlisted</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout" class="nav-link">
+                            <i class="nav-icon fas fa-power-off"></i>
+                            <p>
+                                Log Out
+                            </p>
+                        </a>
+                    </li>
+
+                <?php
                 } else {
                 ?>
+                    <li class="nav-item">
+                        <a href="std_home" class="nav-link">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Home
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="std_profile" class="nav-link">
+                            <i class="nav-icon fas fa-user-tag"></i>
+                            <p>
+                                Profile
+                            </p>
+                        </a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a href="std_jobs" class="nav-link">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Jobs
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="std_job_applications" class="nav-link">
+                            <i class="nav-icon fas fa-file-signature"></i>
+                            <p>
+                                My Job Applications
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="std_shortlisted_applicants" class="nav-link">
+                            <i class="nav-icon fas fa-user-check"></i>
+                            <p>
+                                ShortListed Jobs
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                My Reports
+                                <i class="fas fa-angle-left right"></i>
+                                <span class="badge badge-info right">3</span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="std_reports_applications" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Applications</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="std_reports_shortlisted" class="nav-link">
+                                    <i class="fas fa-angle-right nav-icon"></i>
+                                    <p>Shortlisted</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout" class="nav-link">
+                            <i class="nav-icon fas fa-power-off"></i>
+                            <p>
+                                Log Out
+                            </p>
+                        </a>
+                    </li>
                 <?php
                 } ?>
             </ul>
