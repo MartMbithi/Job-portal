@@ -167,7 +167,7 @@ require_once('../partials/head.php');
                                                     please click the below button to submit your job application
                                                 </p>
                                                 <div class="text-center">
-                                                    <a href="apply" data-toggle="modal" class="btn btn-outline-success"><i class="fas fa-file-signature"></i>Apply This Job</a>
+                                                    <a href="#apply" data-toggle="modal" class="btn btn-outline-success"><i class="fas fa-file-signature"></i>Apply This Job</a>
                                                 </div>
                                                 <!-- Application Modal -->
                                                 <div class="modal fade" id="apply" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
