@@ -323,6 +323,10 @@ require_once('../partials/head.php');
                                             </td>
                                             <td><?php echo $std->Student_Highest_educational_attainment; ?></td>
                                             <td>
+                                                <a class="badge badge-success" href="student?view=<?php echo $std->Student_Id; ?>">
+                                                    <i class="fas fa-eye"></i>
+                                                    View
+                                                </a>
 
                                                 <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $std->Student_Id; ?>">
                                                     <i class="fas fa-edit"></i>
