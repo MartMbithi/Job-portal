@@ -131,7 +131,9 @@ require_once('../partials/head.php');
                                                 Email : <?php echo $applications->Company_email; ?>
                                             </td>
                                             <td>
-                                                Name: <?php echo $applications->Student_Full_Name; ?><br>
+                                                <a href="student?view=<?php echo $applications->Student_Id; ?>">
+                                                    Name: <?php echo $applications->Student_Full_Name; ?><br>
+                                                </a>
                                                 Phone: <?php echo $applications->Student_Contacts; ?><br>
                                                 Email: <?php echo $applications->Student_Email; ?><br>
                                                 Location : <?php echo $applications->Student_location; ?><br>
