@@ -92,33 +92,25 @@ if (isset($_POST['Update_Auth'])) {
 
     $Login_id = $_POST['Login_id'];
     $Login_username = $_POST['Login_username'];
-    $old_password = sha1(md5($_POST['old_password']));
     $new_password  = sha1(md5($_POST['new_password']));
     $confirm_password  = sha1(md5($_POST['confirm_password']));
-    /* Check If Old Passwords Match */
-    $sql = "SELECT * FROM  login  WHERE Login_id = '$Login_id'";
-    $res = mysqli_query($mysqli, $sql);
-    if (mysqli_num_rows($res) > 0) {
-        $row = mysqli_fetch_assoc($res);
 
-        if ($old_password != $row['Login_password']) {
-            $err =  "Please Enter Correct Old Password";
-        } elseif ($new_password != $confirm_password) {
-            $err = "Confirmation Password Does Not Match";
+    if ($new_password != $confirm_password) {
+        $err = "Confirmation Password Does Not Match";
+    } else {
+
+        $query = "UPDATE login SET  Login_username =?, Login_password =? WHERE Login_id =?    ";
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('sss', $Login_username, $confirm_password, $Login_id);
+        $stmt->execute();
+        if ($stmt) {
+            $success = "$Login_username Account Login Details Updated";
         } else {
-
-            $query = "UPDATE login SET  Login_username =?, Login_password =? WHERE Login_id =?    ";
-            $stmt = $mysqli->prepare($query);
-            $rc = $stmt->bind_param('sss', $Login_username, $confirm_password, $Login_id);
-            $stmt->execute();
-            if ($stmt) {
-                $success = "$Login_username Account Login Details Updated";
-            } else {
-                $info = "Please Try Again Or Try Later";
-            }
+            $info = "Please Try Again Or Try Later";
         }
     }
 }
+
 require_once('../partials/head.php');
 ?>
 
@@ -208,40 +200,38 @@ require_once('../partials/head.php');
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane active" id="add_job">
                                                 <form method="post" enctype="multipart/form-data" role="form">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Job Title</label>
-                                                                <input type="hidden" required name="Job_Company_id" value="<?php echo $company->Company_id; ?>" class="form-control">
-                                                                <input type="text" required name="Job_title" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Job Category</label>
-                                                                <input type="text" required name="Job_Category" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Job Location</label>
-                                                                <input type="text" required name="Job_location" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Job Apply Date</label>
-                                                                <input type="date" required name="Job_apply_date" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Job Application Closing Date</label>
-                                                                <input type="date" required name="Job_Last_application_date" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label for="">Job No Of Vacancies</label>
-                                                                <input type="number" required name="Job_No_of_vacancy" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-12">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Job Title</label>
+                                                            <input type="hidden" required name="Job_Company_id" value="<?php echo $company->Company_id; ?>" class="form-control">
+                                                            <input type="text" required name="Job_title" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Job Category</label>
+                                                            <input type="text" required name="Job_Category" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Job Location</label>
+                                                            <input type="text" required name="Job_location" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Job Apply Date</label>
+                                                            <input type="date" required name="Job_apply_date" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Job Application Closing Date</label>
+                                                            <input type="date" required name="Job_Last_application_date" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="">Job No Of Vacancies</label>
+                                                            <input type="number" required name="Job_No_of_vacancy" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-12">
 
-                                                            </div>
-                                                            <div class="form-group col-md-12">
-                                                                <label for="exampleInputPassword1">Job Description</label>
-                                                                <textarea name="Job_description" rows="5" class="form-control"></textarea>
-                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="exampleInputPassword1">Job Description</label>
+                                                            <textarea name="Job_description" rows="5" class="form-control"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="text-right">
@@ -263,12 +253,6 @@ require_once('../partials/head.php');
                                                             <div class="col-sm-10">
                                                                 <input type="text" required name="Login_username" value="<?php echo $company_auth->Login_username; ?>" class="form-control">
                                                                 <input type="hidden" required name="Login_id" value="<?php echo $company_auth->Login_id; ?>" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-2 col-form-label">Old Password</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="password" required name="old_password" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

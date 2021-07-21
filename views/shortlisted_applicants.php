@@ -122,7 +122,7 @@ require_once('../partials/head.php');
                                                 Nationality: <?php echo $applications->Student_Nationality; ?>
                                             </td>
                                             <td>
-                                               <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
+                                                <?php echo date('d M Y', strtotime($applications->Application_Date)); ?><br>
                                             </td>
                                             <td>
                                                 <?php echo date('d M Y', strtotime($applications->Shortlisting_Date)); ?>
@@ -146,7 +146,7 @@ require_once('../partials/head.php');
                                                             <div class="modal-body text-center text-danger">
                                                                 <h4>Delete?</h4>
                                                                 <br>
-                                                                <p>Heads Up, You are about to delete this job application. This action is irrevisble.</p>
+                                                                <p>Heads Up, You are about to delete this job application shortlist. This action is irrevisble.</p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                 <a href="shortlisted_applicants?delete=<?php echo $applications->Shortlisting_id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                             </div>

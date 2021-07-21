@@ -29,14 +29,12 @@ if (isset($_POST['Update_Auth'])) {
 
     $Login_id = $_POST['Login_id'];
     $Login_username = $_POST['Login_username'];
-    $old_password = sha1(md5($_POST['old_password']));
     $new_password  = sha1(md5($_POST['new_password']));
     $confirm_password  = sha1(md5($_POST['confirm_password']));
     /* Check If Old Passwords Match */
     if ($new_password != $confirm_password) {
         $err = "Confirmation Password Does Not Match";
     } else {
-
         $query = "UPDATE login SET  Login_username =?, Login_password =? WHERE Login_id =?    ";
         $stmt = $mysqli->prepare($query);
         $rc = $stmt->bind_param('sss', $Login_username, $confirm_password, $Login_id);
