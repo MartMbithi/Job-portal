@@ -22,7 +22,9 @@
 
 session_start();
 require_once('../config/config.php');
+require_once('../config/codeGen.php');
 
+/* Login */
 if (isset($_POST['Login'])) {
     $Login_username = $_POST['Login_username'];
     $Login_password = sha1(md5($_POST['Login_password']));
@@ -46,6 +48,122 @@ if (isset($_POST['Login'])) {
         header("location:company_home");
     } else {
         $err = "Login Failed, Please Check Your Credentials And Login Permission ";
+    }
+}
+
+/* Sign Up As Student */
+if (isset($_POST['add_student'])) {
+    $Student_Full_Name = $_POST['Student_Full_Name'];
+    $Student_ID_Passport = $_POST['Student_ID_Passport'];
+    $Student_Gender = $_POST['Student_Gender'];
+    $Student_DOB = $_POST['Student_DOB'];
+    $Student_Nationality  = $_POST['Student_Nationality'];
+    $Student_location = $_POST['Student_location'];
+    $Student_Contacts  = $_POST['Student_Contacts'];
+    $Student_Email = $_POST['Student_Email'];
+    $Student_Highest_educational_attainment = $_POST['Student_Highest_educational_attainment'];
+    $Student_Login_id = $_POST['Student_Login_id'];
+    $Student_account_status = 'Approved';
+
+    $student_CV = time() . $_FILES['student_CV']['name'];
+    move_uploaded_file($_FILES["student_CV"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_CV);
+
+    $student_Documents =  time() . $_FILES['student_Documents']['name'];
+    move_uploaded_file($_FILES["student_Documents"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_Documents);
+
+
+    /* Student Auth Details */
+    $Login_password = sha1(md5($_POST['Login_password']));
+    $Login_rank = 'Student';
+
+    /* Prevent Double Entries */
+    $sql = "SELECT * FROM  student WHERE Student_ID_Passport = '$Student_ID_Passport' || Student_Email = '$Student_Email'     ";
+    $res = mysqli_query($mysqli, $sql);
+    if (mysqli_num_rows($res) > 0) {
+        $row = mysqli_fetch_assoc($res);
+        if ($Student_ID_Passport == $row['Student_ID_Passport'] || $Student_Email == $row['Student_Email']) {
+            $err =  "$Student_ID_Passport Or $Student_Email Already Exists";
+        }
+    } else {
+        $query = "INSERT INTO student (Student_Full_Name, Student_ID_Passport, Student_Gender, Student_DOB, Student_Nationality, Student_location, 
+        Student_Contacts, Student_Email, Student_Highest_educational_attainment, Student_Login_id, Student_account_status, student_CV, student_Documents)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $auth = "INSERT INTO login(Login_id, Login_username, Login_password, Login_rank) VALUES(?,?,?,?)";
+
+        $stmt = $mysqli->prepare($query);
+        $authstmt = $mysqli->prepare($auth);
+
+        $rc = $stmt->bind_param(
+            'sssssssssssss',
+            $Student_Full_Name,
+            $Student_ID_Passport,
+            $Student_Gender,
+            $Student_DOB,
+            $Student_Nationality,
+            $Student_location,
+            $Student_Contacts,
+            $Student_Email,
+            $Student_Highest_educational_attainment,
+            $Student_Login_id,
+            $Student_account_status,
+            $student_CV,
+            $student_Documents
+        );
+        $rc = $authstmt->bind_param('ssss', $Student_Login_id, $Student_Email, $Login_password, $Login_rank);
+
+        $stmt->execute();
+        $authstmt->execute();
+
+        if ($stmt && $authstmt) {
+            $success = "$Student_Full_Name Account Created Proceed To Log In";
+        } else {
+            $info = "Please Try Again Or Try Later";
+        }
+    }
+}
+
+/* Sign Up As Company */
+if (isset($_POST['add_company'])) {
+    $Company_name = $_POST['Company_name'];
+    $Company_location = $_POST['Company_location'];
+    $Company_contact = $_POST['Company_contact'];
+    $Company_email = $_POST['Company_email'];
+    $Company_Category_id  = $_POST['Company_Category_id'];
+    $Company_website = $_POST['Company_website'];
+    $company_login_id  = $_POST['company_login_id'];
+    $company_account_status = 'Approved';
+
+    /* Company Auth  */
+    $Login_username = $_POST['Login_username'];
+    $Login_password = sha1(md5($_POST['Login_password']));
+    $Login_rank = 'Company';
+
+    /* Prevent Double Entries */
+    $sql = "SELECT * FROM  company WHERE Company_name = '$Company_name'   ";
+    $res = mysqli_query($mysqli, $sql);
+    if (mysqli_num_rows($res) > 0) {
+        $row = mysqli_fetch_assoc($res);
+        if ($Company_name == $row['Company_name']) {
+            $err =  "$Company_name Already Exists";
+        }
+    } else {
+        $query = "INSERT INTO company (Company_name, Company_location, Company_contact, Company_email, Company_Category_id, Company_website, company_login_id, company_account_status) VALUES(?,?,?,?,?,?,?,?)";
+        $auth = "INSERT INTO login (Login_id, Login_username, Login_password, Login_rank) VALUES(?,?,?,?)";
+
+        $stmt = $mysqli->prepare($query);
+        $authstmt = $mysqli->prepare($auth);
+
+        $rc = $stmt->bind_param('ssssssss', $Company_name, $Company_location, $Company_contact, $Company_email, $Company_Category_id, $Company_website, $company_login_id, $company_account_status);
+        $rc = $authstmt->bind_param('ssss', $company_login_id, $Login_username, $Login_password, $Login_rank);
+
+        $stmt->execute();
+        $authstmt->execute();
+
+        if ($stmt && $authstmt) {
+            $success = "$Company_name Account Created, Proceed To Login In";
+        } else {
+            $info = "Please Try Again Or Try Later";
+        }
     }
 }
 require_once('../partials/head.php');
