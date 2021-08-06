@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2021 at 12:49 PM
+-- Generation Time: Aug 06, 2021 at 10:28 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -93,7 +93,9 @@ INSERT INTO `company` (`Company_id`, `Company_name`, `Company_location`, `Compan
 (1, 'Tech Savanna', '127 Localhost', '+254900933124', 'mail@techsavanna.org', 1, 'techsavanna.org', 'e12d5fa22e77b909651dd836ec7c372d0e73196b33', 'Approved'),
 (4, 'Gelian Hotel', '127 Machakos.', '+125900924', 'hello@gelian.com', 3, 'gelian.com', '0c0fa9f6f86f9b325af1d2b5e2629dc7d3abcfc552', 'Approved'),
 (5, 'Dynasoft Inc', '901276 Nairobi', '+9012578634', 'hello@dynasoft.inc', 1, 'dynasoft.inc', '8438bd3198740b57b4757ba33e11df60745b9179cf', 'Approved'),
-(7, 'Devlan Inc Technologies', '90127 Localhost', '+254737229776', 'mail@devlan.com', 1, 'devlan.com', '5b00ff374b251443d55ec43ace255355c13f63f803', 'Approved');
+(7, 'Devlan Inc Technologies', '90127 Localhost', '+254737229776', 'mail@devlan.com', 1, 'devlan.com', '5b00ff374b251443d55ec43ace255355c13f63f803', 'Approved'),
+(8, 'Martdevelopers Inc', 'Machakos - Kenya', '0710090126', 'mail@martdevelopers.inc', 1, 'martdevelopers.com', '95c1d96966ef2ec4ce98717e96b2dac645a7743c6a', 'Approved'),
+(9, 'Softonic Technologies', '90126 Localhost', '90126', 'mail@softonic.com', 1, 'softonic.com', '9f76719088af35118f249ae3afe82e53e17dd5d772', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -168,8 +170,11 @@ INSERT INTO `login` (`Login_id`, `Login_username`, `Login_password`, `Login_rank
 ('5b00ff374b251443d55ec43ace255355c13f63f803', 'login@devlan.com', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Company'),
 ('67c76a313610f27a26b64ab61f59b64dc1490761de', 'jamesdoe@mail.com', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Student'),
 ('8438bd3198740b57b4757ba33e11df60745b9179cf', 'Dynasoft Technologies', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Company'),
+('95c1d96966ef2ec4ce98717e96b2dac645a7743c6a', 'Martdev', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Company'),
+('9f76719088af35118f249ae3afe82e53e17dd5d772', 'softonic', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Company'),
 ('ae57b369fddac114a075a90939dbf7ef332d69ea16', 'jamesfdoe@mail.com', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Student'),
 ('cc24ede799a3758c71c928c95b3cd3917e88801a43', 'jobdoe@mail.com', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Student'),
+('ddab4759b8d8e46f552a3b321745714adfabd18b9e', 'me@me.com', 'eac5b439afd9c155a79ee050744ff6f76b01e5cf', 'Student'),
 ('e12d5fa22e77b909651dd836ec7c372d0e73196b33', 'Tech Savanna', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Company'),
 ('fea4505fd3c994f5683f', 'System Administrator', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Administrator');
 
@@ -228,7 +233,8 @@ INSERT INTO `student` (`Student_Id`, `Student_Full_Name`, `Student_ID_Passport`,
 (3, 'Janet Doe', '900125648', 'Female', '1990-12-09', 'Uganda', 'Nairobi', '+254723456789', 'janedoe@mail.com', 'Tertiary', '380abc865b14efc50064f2ee036207800f0453c4be', '1626781930dummy.pdf', '1626781930dummy.pdf', 'Approved'),
 (4, 'Doe Jackson', '90125477', 'Male', '1980-12-12', 'Kenyan', 'Nairobi', '+254900123456', 'dj120@mail.com', 'Tertiary', '1bb387e60744d32059c1cd1f716e337d8a868b793a', '1626853616dummy.pdf', '1626853616dummy.pdf', 'Approved'),
 (5, 'James F Doe', '901267653412', 'Male', '1998-12-12', 'Uganda', 'Kampala', '+25312907452', 'jamesfdoe@mail.com', 'Tertiary', 'ae57b369fddac114a075a90939dbf7ef332d69ea16', '1626855156dummy.pdf', '1626855156dummy.pdf', 'Approved'),
-(6, 'Job Doe', '1270019023', 'Male', '1990-12-12', 'Kenya', 'Mombasa', '+25471234567', 'jobdoe@mail.com', 'Tertiary', 'cc24ede799a3758c71c928c95b3cd3917e88801a43', '1626863318dummy.pdf', '1626863318dummy.pdf', 'Approved');
+(6, 'Job Doe', '1270019023', 'Male', '1990-12-12', 'Kenya', 'Mombasa', '+25471234567', 'jobdoe@mail.com', 'Tertiary', 'cc24ede799a3758c71c928c95b3cd3917e88801a43', '1626863318dummy.pdf', '1626863318dummy.pdf', 'Approved'),
+(7, 'Me', '9876534567', 'Male', '2021-08-06', 'Kenya', 'Here', '0987623454', 'me@me.com', 'Tertiary', 'ddab4759b8d8e46f552a3b321745714adfabd18b9e', '1628279635dummy.pdf', '1628279635dummy.pdf', 'Approved');
 
 --
 -- Indexes for dumped tables
@@ -311,7 +317,7 @@ ALTER TABLE `applications`
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `Company_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Company_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `company_categories`
@@ -335,7 +341,7 @@ ALTER TABLE `shortlisting`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `Student_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Student_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
