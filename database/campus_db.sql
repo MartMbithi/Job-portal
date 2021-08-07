@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 06, 2021 at 10:28 PM
+-- Generation Time: Aug 09, 2021 at 08:50 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -91,7 +91,6 @@ CREATE TABLE `company` (
 
 INSERT INTO `company` (`Company_id`, `Company_name`, `Company_location`, `Company_contact`, `Company_email`, `Company_Category_id`, `Company_website`, `company_login_id`, `company_account_status`) VALUES
 (1, 'Tech Savanna', '127 Localhost', '+254900933124', 'mail@techsavanna.org', 1, 'techsavanna.org', 'e12d5fa22e77b909651dd836ec7c372d0e73196b33', 'Approved'),
-(4, 'Gelian Hotel', '127 Machakos.', '+125900924', 'hello@gelian.com', 3, 'gelian.com', '0c0fa9f6f86f9b325af1d2b5e2629dc7d3abcfc552', 'Approved'),
 (5, 'Dynasoft Inc', '901276 Nairobi', '+9012578634', 'hello@dynasoft.inc', 1, 'dynasoft.inc', '8438bd3198740b57b4757ba33e11df60745b9179cf', 'Approved'),
 (7, 'Devlan Inc Technologies', '90127 Localhost', '+254737229776', 'mail@devlan.com', 1, 'devlan.com', '5b00ff374b251443d55ec43ace255355c13f63f803', 'Approved'),
 (8, 'Martdevelopers Inc', 'Machakos - Kenya', '0710090126', 'mail@martdevelopers.inc', 1, 'martdevelopers.com', '95c1d96966ef2ec4ce98717e96b2dac645a7743c6a', 'Approved'),
@@ -140,10 +139,7 @@ CREATE TABLE `job` (
 --
 
 INSERT INTO `job` (`Job_id`, `Job_title`, `Job_Category`, `Job_description`, `Job_location`, `Job_Company_id`, `Job_apply_date`, `Job_Last_application_date`, `Job_No_of_vacancy`) VALUES
-(1, 'Software Engineer', 'Entry Level', 'Tech Savanna is looking for an entry level full stack software engineer.', 'Nairobi', 1, '2021-07-20', '2021-08-03', 2),
-(3, 'Hotel Manager', 'Managerial', 'Gelian Group Of Hotels is looking ahead to hire a talented manager.', 'Machakos', 4, '2021-07-20', '2021-08-03', 1),
-(5, 'UI/UX Designer', 'Middle Level', 'Tech Savanna is looking for an experienced UI/UX Designer to join their team.', 'Nairobi', 1, '2021-07-20', '2021-08-03', 2),
-(7, 'Web / App Developer', 'Mid Level', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit. Aliquam eleifend mi in nulla posuere sollicitudin aliquam. Faucibus purus in massa tempor. Consectetur adipiscing elit duis tristique sollicitudin nibh sit amet. Eget aliquet nibh praesent tristique magna. Mauris nunc congue nisi vitae. Sit amet est placerat in. Imperdiet nulla malesuada pellentesque elit. Nisi vitae suscipit tellus mauris a. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Elementum tempus egestas sed sed risus pretium quam. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. Eu lobortis elementum nibh tellus molestie nunc non. At varius vel pharetra vel turpis nunc eget lorem dolor. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\r\n\r\nTortor posuere ac ut consequat semper viverra nam libero. Id eu nisl nunc mi ipsum faucibus vitae aliquet. Luctus venenatis lectus magna fringilla urna porttitor. Nec sagittis aliquam malesuada bibendum arcu. Sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis. Morbi tristique senectus et netus et malesuada fames ac. Mauris a diam maecenas sed enim. Orci a scelerisque purus semper eget. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Ligula ullamcorper malesuada proin libero. Adipiscing tristique risus nec feugiat in fermentum. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque.', 'Remote', 5, '2021-07-21', '2021-08-04', 2);
+(3, 'Hotel Manager', 'Managerial', 'Gelian Group Of Hotels is looking ahead to hire a talented manager.', 'Machakos', 4, '2021-07-20', '2021-08-03', 1);
 
 -- --------------------------------------------------------
 
@@ -163,7 +159,6 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`Login_id`, `Login_username`, `Login_password`, `Login_rank`) VALUES
-('0c0fa9f6f86f9b325af1d2b5e2629dc7d3abcfc552', 'Gelian Hotels', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Company'),
 ('1bb387e60744d32059c1cd1f716e337d8a868b793a', 'dj120@mail.com', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Student'),
 ('203510332579cc786b976991204ff2787c7d7ed302', 'annamontana@mail.com', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Student'),
 ('380abc865b14efc50064f2ee036207800f0453c4be', 'janedoe@mail.com', 'a69681bcf334ae130217fea4505fd3c994f5683f', 'Student'),
