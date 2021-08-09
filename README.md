@@ -12,4 +12,5 @@ Password : demo
 ```
 
 # Screenshots
-
+![alt text](https://github.com/MartMbithi/Job-portal/blob/main/public/img/login.png)
+![alt text](https://github.com/MartMbithi/Job-portal/blob/main/public/img/dashboard.png)
