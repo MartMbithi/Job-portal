@@ -61,11 +61,10 @@ if (isset($_POST['update_student'])) {
     $Student_Id = $_POST['Student_Id'];
 
     $student_CV = time() . $_FILES['student_CV']['name'];
-    move_uploaded_file($_FILES["student_CV"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_CV);
+    move_uploaded_file($_FILES["student_CV"]["tmp_name"], "../public/uploads/" .  $student_CV);
 
     $student_Documents =  time() . $_FILES['student_Documents']['name'];
-    move_uploaded_file($_FILES["student_Documents"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_Documents);
-
+    move_uploaded_file($_FILES["student_Documents"]["tmp_name"], "../public/uploads/" . $student_Documents);
 
 
     $query = "UPDATE student SET  Student_Full_Name =?, Student_ID_Passport =?, student_Documents =?,  student_CV=?, Student_Gender =?, Student_DOB =?, Student_Nationality =?,  Student_location =?, 

@@ -40,10 +40,10 @@ if (isset($_POST['add_student'])) {
     $Student_account_status = 'Approved';
 
     $student_CV = time() . $_FILES['student_CV']['name'];
-    move_uploaded_file($_FILES["student_CV"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_CV);
+    move_uploaded_file($_FILES["student_CV"]["tmp_name"], "../public/uploads/" . $student_CV);
 
     $student_Documents =  time() . $_FILES['student_Documents']['name'];
-    move_uploaded_file($_FILES["student_Documents"]["tmp_name"], "../public/uploads/user_data/" . time() . $student_Documents);
+    move_uploaded_file($_FILES["student_Documents"]["tmp_name"], "../public/uploads/" . $student_Documents);
 
 
     /* Student Auth Details */

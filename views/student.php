@@ -141,8 +141,8 @@ require_once('../partials/head.php');
                                         <div class="tab-content">
                                             <div class="active tab-pane" id="activity">
                                                 <div class="text-center">
-                                                    <a target="_blank" href="../public/uploads/user_data/<?php echo $student->student_CV; ?>" class="btn btn-outline-success"><i class="fas fa-download"></i>Download CV</a>
-                                                    <a target="_blank" href="../public/uploads/user_data/<?php echo $student->student_Documents; ?>" class="btn btn-outline-success"><i class="fas fa-download"></i>Download Other <?php echo $student->Student_Full_Name; ?> Documents</a>
+                                                    <a target="_blank" href="../public/uploads/<?php echo $student->student_CV; ?>" class="btn btn-outline-success"><i class="fas fa-download"></i>Download CV</a>
+                                                    <a target="_blank" href="../public/uploads/<?php echo $student->student_Documents; ?>" class="btn btn-outline-success"><i class="fas fa-download"></i>Download Other <?php echo $student->Student_Full_Name; ?> Documents</a>
                                                 </div>
                                             </div>
                                             <!-- /.tab-pane -->
